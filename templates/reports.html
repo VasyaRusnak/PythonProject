@@ -1,0 +1,29 @@
+﻿{% extends "base.html" %}
+{% block content %}
+<div class="card shadow-sm mt-4">
+    <div class="card-body">
+        <h2 class="mb-4 text-success"><i class="fa fa-chart-bar"></i> Звіти</h2>
+        <div class="mb-4">
+            <h5>Загальний дохід:</h5>
+            <span class="badge bg-success fs-5">{{ income }}</span>
+        </div>
+        <div class="mb-4">
+            <h5>Клієнти з боргами:</h5>
+            <ul class="list-group">
+                {% for client in debtors %}
+                    <li class="list-group-item"><i class="fa fa-user"></i> {{ client.name }} ({{ client.debts }})</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="mb-4">
+            <h5>Активні бронювання:</h5>
+            <ul class="list-group">
+                {% for booking in active_bookings %}
+                    <li class="list-group-item"><i class="fa fa-calendar-check"></i> {{ booking._id }} ({{ booking.status }})</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <a class="btn btn-secondary" href="{{ url_for('dashboard') }}"><i class="fa fa-arrow-left"></i> Назад</a>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,26 @@
+﻿{% extends "base.html" %}
+{% block content %}
+<div class="card shadow-sm mt-4">
+    <div class="card-body">
+        <h2 class="mb-4 text-center text-primary"><i class="fa fa-home"></i>Головна</h2>
+        <p class="text-center">Ваша роль: <span class="badge bg-info text-dark">{{ role }}</span></p>
+        <div class="row row-cols-1 row-cols-md-2 g-3 mt-4">
+            <div class="col"><a class="btn btn-outline-primary w-100 py-3" href="{{ url_for('crud', entity='Hotels') }}"><i class="fa fa-hotel"></i>Готелі</a></div>
+            <div class="col"><a class="btn btn-outline-primary w-100 py-3" href="{{ url_for('crud', entity='Rooms') }}"><i class="fa fa-door-open"></i>Номери</a></div>
+            <div class="col"><a class="btn btn-outline-primary w-100 py-3" href="{{ url_for('crud', entity='Clients') }}"><i class="fa fa-users"></i>Клієнти</a></div>
+            <div class="col"><a class="btn btn-outline-primary w-100 py-3" href="{{ url_for('crud', entity='Firms') }}"><i class="fa fa-building"></i>Організації</a></div>
+            <div class="col"><a class="btn btn-outline-primary w-100 py-3" href="{{ url_for('crud', entity='Bookings') }}"><i class="fa fa-calendar-check"></i>Бронювання</a></div>
+            <div class="col"><a class="btn btn-outline-primary w-100 py-3" href="{{ url_for('crud', entity='Services') }}"><i class="fa fa-concierge-bell"></i>Послуги</a></div>
+            <div class="col"><a class="btn btn-outline-primary w-100 py-3" href="{{ url_for('crud', entity='Complaints') }}"><i class="fa fa-exclamation-triangle"></i>Скарги</a></div>
+            <div class="col"><a class="btn btn-outline-primary w-100 py-3" href="{{ url_for('crud', entity='Finance') }}"><i class="fa fa-money-bill-wave"></i>Фінанси</a></div>
+           {% if role == "guest" %}
+<div class="col">
+    <a class="btn btn-warning w-100 py-3" href="{{ url_for('request_upgrade_route') }}">
+        <i class="fa fa-arrow-up"></i>Запит на підвищення прав
+    </a>
+</div>
+{% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,16 @@
+﻿{% extends "base.html" %}
+{% block content %}
+<h2 class="mt-4 text-center">Редагування {{ entity }}</h2>
+<form method="post" class="mt-3">
+    {% for key, value in record.items() %}
+        {% if key != "id" %}
+        <div class="mb-3">
+            <label class="form-label">{{ key }}</label>
+            <input name="{{ key }}" value="{{ value }}" class="form-control">
+        </div>
+        {% endif %}
+    {% endfor %}
+    <button type="submit" class="btn btn-success">Зберегти</button>
+    <a href="{{ url_for('crud', entity=entity) }}" class="btn btn-secondary">Відмінити</a>
+</form>
+{% endblock %}

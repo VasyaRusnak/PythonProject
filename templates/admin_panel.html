@@ -1,0 +1,39 @@
+﻿{% extends "base.html" %}
+{% block content %}
+<div class="card shadow-sm">
+    <div class="card-body">
+        <h2 class="mb-4">Адмін-панель: Заявки на підвищення прав</h2>
+        {% if requests %}
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover align-middle">
+                <thead class="table-light">
+                    <tr>
+                        <th>Логін</th>
+                        <th>Статус</th>
+                        <th>Дії</th>
+                    </tr>
+                </thead>
+                <tbody>
+                   {% for req in requests %}
+<tr>
+    <td>{{ req.login }}</td>
+    <td>{{ req.status }}</td>
+    <td>
+        <a class="btn btn-success btn-sm" href="{{ url_for('approve', login_=req.login) }}">Підтвердити</a>
+        <a class="btn btn-danger btn-sm" href="{{ url_for('reject', login_=req.login) }}">Відхилити</a>
+    </td>
+</tr>
+{% endfor %}
+                {% if session.role == 'admin' %}
+<a class="btn btn-primary mb-3" href="{{ url_for('add_operator') }}">Додати оператора</a>
+{% endif %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <p>Заявок немає.</p>
+        {% endif %}
+        <a class="btn btn-secondary mt-3" href="{{ url_for('dashboard') }}">Назад</a>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,58 @@
+﻿{% extends "base.html" %}
+{% block content %}
+<div class="card shadow-sm mt-4">
+    <div class="card-body">
+        <h2 class="mb-4 text-primary"><i class="fa fa-hotel"></i> Готелі</h2>
+        <form method="post" class="row g-2 mb-3">
+            <div class="col">
+                <input name="search" class="form-control" placeholder="Пошук за назвою">
+            </div>
+            <div class="col">
+                <input name="hotel_class" class="form-control" placeholder="Клас (наприклад, 5*)">
+            </div>
+            <div class="col">
+                <button class="btn btn-primary" type="submit">Пошук</button>
+            </div>
+            {% if role in ['admin', 'operator'] %}
+            <div class="col">
+                <a href="{{ url_for('hotel_add') }}" class="btn btn-success">Додати готель</a>
+            </div>
+            {% endif %}
+        </form>
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover align-middle bg-white">
+                <thead class="table-light">
+                    <tr>
+                        <th>Назва</th>
+                        <th>Клас</th>
+                        <th>Місто</th>
+                        <th>Адреса</th>
+                        <th>Кількість номерів</th>
+                        {% if role in ['admin', 'operator'] %}
+                        <th>Дії</th>
+                        {% endif %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for hotel in data %}
+                    <tr>
+                        <td>{{ hotel.name }}</td>
+                        <td>{{ hotel.class }}</td>
+                        <td>{{ hotel.city }}</td>
+                        <td>{{ hotel.address }}</td>
+                        <td>{{ hotel.rooms_count }}</td>
+                        {% if role in ['admin', 'operator'] %}
+                        <td>
+                            <a href="{{ url_for('hotel_edit', hotel_id=hotel._id) }}" class="btn btn-sm btn-warning">Редагувати</a>
+                            <a href="{{ url_for('hotel_delete', hotel_id=hotel._id) }}" class="btn btn-sm btn-danger" onclick="return confirm('Видалити готель?')">Видалити</a>
+                        </td>
+                        {% endif %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <a class="btn btn-secondary mt-3" href="{{ url_for('dashboard') }}"><i class="fa fa-arrow-left"></i> Назад</a>
+    </div>
+</div>
+{% endblock %}

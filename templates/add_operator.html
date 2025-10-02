@@ -1,0 +1,20 @@
+﻿{% extends "base.html" %}
+{% block content %}
+<div class="card shadow-sm">
+    <div class="card-body">
+        <h2 class="mb-4">Додати оператора</h2>
+        <form method="POST">
+            <div class="mb-3">
+                <label for="login" class="form-label">Логін</label>
+                <input type="text" class="form-control" id="login" name="login" required>
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Пароль</label>
+                <input type="password" class="form-control" id="password" name="password" required>
+            </div>
+            <button type="submit" class="btn btn-success">Створити</button>
+            <a class="btn btn-secondary" href="{{ url_for('admin_panel') }}">Назад</a>
+        </form>
+    </div>
+</div>
+{% endblock %}
