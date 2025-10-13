@@ -1,0 +1,21 @@
+﻿{% extends "base.html" %}
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4 text-primary"><i class="fa fa-save"></i> Мої збережені результати</h2>
+
+    {% if results %}
+        {% for result in results %}
+        <div class="card mb-3">
+            <div class="card-header bg-info text-white">
+                {{ result.query_name }}
+            </div>
+            <div class="card-body">
+                <pre>{{ result.result_data | tojson(indent=2) }}</pre>
+            </div>
+        </div>
+        {% endfor %}
+    {% else %}
+        <p>У вас поки немає збережених результатів.</p>
+    {% endif %}
+</div>
+{% endblock %}

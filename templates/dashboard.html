@@ -1,26 +1,81 @@
 ﻿{% extends "base.html" %}
 {% block content %}
-<div class="card shadow-sm mt-4">
-    <div class="card-body">
-        <h2 class="mb-4 text-center text-primary"><i class="fa fa-home"></i>Головна</h2>
-        <p class="text-center">Ваша роль: <span class="badge bg-info text-dark">{{ role }}</span></p>
-        <div class="row row-cols-1 row-cols-md-2 g-3 mt-4">
-            <div class="col"><a class="btn btn-outline-primary w-100 py-3" href="{{ url_for('crud', entity='Hotels') }}"><i class="fa fa-hotel"></i>Готелі</a></div>
-            <div class="col"><a class="btn btn-outline-primary w-100 py-3" href="{{ url_for('crud', entity='Rooms') }}"><i class="fa fa-door-open"></i>Номери</a></div>
-            <div class="col"><a class="btn btn-outline-primary w-100 py-3" href="{{ url_for('crud', entity='Clients') }}"><i class="fa fa-users"></i>Клієнти</a></div>
-            <div class="col"><a class="btn btn-outline-primary w-100 py-3" href="{{ url_for('crud', entity='Firms') }}"><i class="fa fa-building"></i>Організації</a></div>
-            <div class="col"><a class="btn btn-outline-primary w-100 py-3" href="{{ url_for('crud', entity='Bookings') }}"><i class="fa fa-calendar-check"></i>Бронювання</a></div>
-            <div class="col"><a class="btn btn-outline-primary w-100 py-3" href="{{ url_for('crud', entity='Services') }}"><i class="fa fa-concierge-bell"></i>Послуги</a></div>
-            <div class="col"><a class="btn btn-outline-primary w-100 py-3" href="{{ url_for('crud', entity='Complaints') }}"><i class="fa fa-exclamation-triangle"></i>Скарги</a></div>
-            <div class="col"><a class="btn btn-outline-primary w-100 py-3" href="{{ url_for('crud', entity='Finance') }}"><i class="fa fa-money-bill-wave"></i>Фінанси</a></div>
-           {% if role == "guest" %}
-<div class="col">
-    <a class="btn btn-warning w-100 py-3" href="{{ url_for('request_upgrade_route') }}">
-        <i class="fa fa-arrow-up"></i>Запит на підвищення прав
-    </a>
-</div>
-{% endif %}
+<div class="container mt-4">
+    <h2 class="mb-4 text-primary"><i class="fa fa-tachometer"></i> Панель керування</h2>
+    <div class="row g-3">
+
+        <!-- CRUD кнопки (для всіх користувачів, включно з guest) -->
+        <div class="col-md-3">
+            <a class="btn btn-outline-primary w-100 py-3" href="{{ url_for('crud', entity='Hotels') }}">
+                <i class="fa fa-hotel"></i> Готелі
+            </a>
         </div>
+        <div class="col-md-3">
+            <a class="btn btn-outline-primary w-100 py-3" href="{{ url_for('crud', entity='Rooms') }}">
+                <i class="fa fa-door-open"></i> Номери
+            </a>
+        </div>
+        <div class="col-md-3">
+            <a class="btn btn-outline-primary w-100 py-3" href="{{ url_for('crud', entity='Clients') }}">
+                <i class="fa fa-users"></i> Клієнти
+            </a>
+        </div>
+        <div class="col-md-3">
+            <a class="btn btn-outline-primary w-100 py-3" href="{{ url_for('crud', entity='Firms') }}">
+                <i class="fa fa-building"></i> Фірми
+            </a>
+        </div>
+        <div class="col-md-3">
+            <a class="btn btn-outline-primary w-100 py-3" href="{{ url_for('crud', entity='Bookings') }}">
+                <i class="fa fa-calendar-check"></i> Бронювання
+            </a>
+        </div>
+        <div class="col-md-3">
+            <a class="btn btn-outline-primary w-100 py-3" href="{{ url_for('crud', entity='Services') }}">
+                <i class="fa fa-concierge-bell"></i> Послуги
+            </a>
+        </div>
+        <div class="col-md-3">
+            <a class="btn btn-outline-primary w-100 py-3" href="{{ url_for('crud', entity='Complaints') }}">
+                <i class="fa fa-exclamation-triangle"></i> Скарги
+            </a>
+        </div>
+        <div class="col-md-3">
+            <a class="btn btn-outline-primary w-100 py-3" href="{{ url_for('crud', entity='Finance') }}">
+                <i class="fa fa-dollar-sign"></i> Фінанси
+            </a>
+        </div>
+
+        <!-- Запити -->
+        <div class="col-md-12 mt-4">
+            <a class="btn btn-outline-success w-100 py-3" href="{{ url_for('queries_dashboard') }}">
+                <i class="fa fa-search"></i> Види запитів
+            </a>
+        </div>
+
+        <!-- Reports -->
+        <div class="col-md-12 mt-2">
+            <a class="btn btn-outline-info w-100 py-3" href="{{ url_for('reports') }}">
+                <i class="fa fa-chart-line"></i> Звіти
+            </a>
+        </div>
+
+        <!-- Saved Results -->
+        <div class="col-md-12 mt-2">
+            <a class="btn btn-outline-warning w-100 py-3" href="{{ url_for('saved_results') }}">
+                <i class="fa fa-save"></i> Мої збережені результати
+            </a>
+        </div>
+
+        <!-- Подати заявку на підвищення прав (тільки guest) -->
+        {% if session.role == 'guest' %}
+        <div class="col-md-12 mt-4">
+            <a class="btn btn-outline-secondary w-100 py-3" href="{{ url_for('request_upgrade_route') }}">
+                <i class="fa fa-arrow-up"></i> Подати заявку на підвищення прав
+            </a>
+        </div>
+        {% endif %}
+
     </div>
 </div>
 {% endblock %}

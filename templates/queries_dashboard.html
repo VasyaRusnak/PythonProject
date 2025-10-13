@@ -1,0 +1,16 @@
+﻿{% extends "base.html" %}
+{% block content %}
+<h2 class="mt-4">Види запитів в інформаційній системі</h2>
+<ol>
+    <li><a href="{{ url_for('run_query', query_id=1) }}">Обсяг бронювання по фірмі</a></li>
+    <li><a href="{{ url_for('run_query', query_id=2) }}">Кількість вільних номерів</a></li>
+    <li><a href="{{ url_for('run_query', query_id=3) }}">Інформація про конкретний вільний номер</a></li>
+    <li><a href="{{ url_for('run_query', query_id=4) }}">Нові клієнти за період</a></li>
+    <li><a href="{{ url_for('run_query', query_id=5) }}">Інформація про клієнта</a></li>
+    <li><a href="{{ url_for('run_query', query_id=6) }}">Постоялець із номера</a></li>
+    <li><a href="{{ url_for('run_query', query_id=7) }}">Фірми з бронюваннями</a></li>
+    <li><a href="{{ url_for('run_query', query_id=8) }}">Клієнти за характеристиками номерів</a></li>
+    <li><a href="{{ url_for('run_query', query_id=9) }}">Заселені номери, які звільняються</a></li>
+    <li><a href="{{ url_for('run_query', query_id=10) }}">Незадоволені клієнти та скарги</a></li>
+</ol>
+{% endblock %}

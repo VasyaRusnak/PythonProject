@@ -1,0 +1,43 @@
+﻿{% extends "base.html" %}
+{% block content %}
+<div class="card shadow-sm mt-4">
+  <div class="card-body">
+    <h2 class="mb-4 text-center text-primary">{{ title }}</h2>
+
+    {% if data %}
+      <h4>Клієнт</h4>
+      <ul>
+        <li>ID: {{ data.client.id }}</li>
+        <li>Ім'я: {{ data.client.name }}</li>
+        <li>Email: {{ data.client.email }}</li>
+      </ul>
+
+      <h4 class="mt-3">Послуги</h4>
+      {% if data.services %}
+        <ul>
+          {% for s in data.services %}
+            <li>{{ s.name }} ({{ s.price }})</li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p>Немає послуг.</p>
+      {% endif %}
+
+      <h4 class="mt-3">Скарги</h4>
+      {% if data.complaints %}
+        <ul>
+          {% for c in data.complaints %}
+            <li>{{ c.text }}</li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p>Немає скарг.</p>
+      {% endif %}
+    {% else %}
+      <p>Даних немає</p>
+    {% endif %}
+
+    <a class="btn btn-secondary mt-3" href="{{ url_for('index') }}">Назад</a>
+  </div>
+</div>
+{% endblock %}

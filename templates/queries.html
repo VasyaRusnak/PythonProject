@@ -1,0 +1,63 @@
+﻿{% extends "base.html" %}
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center text-primary mb-4"><i class="fa fa-database"></i> Види запитів</h2>
+
+    {% set queries = [
+        "Обсяг бронювання по фірмі",
+        "Вільні номери",
+        "Інформація про номер",
+        "Нові клієнти",
+        "Інформація про клієнта",
+        "Постоялець з номера",
+        "Фірми з бронюваннями",
+        "Клієнти за характеристиками номерів",
+        "Заселені номери до дати",
+        "Незадоволені клієнти"
+    ] %}
+
+    <div class="row row-cols-1 row-cols-md-2 g-4">
+        {% for i in range(1, 11) %}
+        <div class="col">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">{{ queries[i-1] }}</h5>
+                    <form method="post" action="{{ url_for('run_query', query_id=i) }}">
+                        {% if i == 1 %}
+                            <label>Фірма ID:</label>
+                            <input type="text" name="firm_id" class="form-control mb-2" required>
+                            <label>Початок періоду:</label>
+                            <input type="date" name="start_date" class="form-control mb-2" required>
+                            <label>Кінець періоду:</label>
+                            <input type="date" name="end_date" class="form-control mb-2" required>
+                        {% elif i == 2 %}
+                            <label>Характеристики номерів (опціонально):</label>
+                            <input type="text" name="characteristics" class="form-control mb-2">
+                        {% elif i in [3,6] %}
+                            <label>Номер кімнати:</label>
+                            <input type="text" name="room_id" class="form-control mb-2" required>
+                        {% elif i in [4,7,8] %}
+                            <label>Початок періоду:</label>
+                            <input type="date" name="start_date" class="form-control mb-2" required>
+                            <label>Кінець періоду:</label>
+                            <input type="date" name="end_date" class="form-control mb-2" required>
+                            {% if i == 8 %}
+                            <label>Характеристики номерів:</label>
+                            <input type="text" name="characteristics" class="form-control mb-2">
+                            {% endif %}
+                        {% elif i == 5 %}
+                            <label>ID клієнта:</label>
+                            <input type="text" name="client_id" class="form-control mb-2" required>
+                        {% elif i == 9 %}
+                            <label>Дата:</label>
+                            <input type="date" name="date" class="form-control mb-2" required>
+                        {% endif %}
+                        <button class="btn btn-primary w-100 mt-2"><i class="fa fa-play"></i> Виконати</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

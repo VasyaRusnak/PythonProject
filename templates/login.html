@@ -2,9 +2,11 @@
 {% block content %}
 <div class="row justify-content-center">
     <div class="col-md-6 col-lg-5">
-        <div class="card p-4 mt-5">
+        <div class="card p-4 mt-5 shadow-sm">
             <div class="card-body">
-                <h3 class="mb-4 text-center text-primary"><i class="fa fa-sign-in-alt"></i>Вхід</h3>
+                <h3 class="mb-4 text-center text-primary">
+                    <i class="fa fa-sign-in-alt"></i> Вхід
+                </h3>
                 <form method="post">
                     <div class="mb-3">
                         <label class="form-label">Логін</label>
@@ -14,9 +16,20 @@
                         <label class="form-label">Пароль</label>
                         <input name="password" type="password" class="form-control" placeholder="Введіть пароль" required>
                     </div>
-                    <button type="submit" class="btn btn-main w-100"><i class="fa fa-sign-in-alt"></i> Увійти</button>
+                    <button type="submit" class="btn btn-main w-100 mb-2">
+                        <i class="fa fa-sign-in-alt"></i> Увійти
+                    </button>
                 </form>
-                <p class="mt-3 text-center">Немає акаунта? <a href="{{ url_for('register') }}">Зареєструватися</a></p>
+
+                <div class="text-center mt-3">
+                    <a href="{{ url_for('register') }}">Немає акаунта? Зареєструватися</a>
+                </div>
+
+                <div class="text-center mt-2">
+                    <a href="{{ url_for('forgot_password_route') }}" class="text-danger">
+                        <i class="fa fa-key"></i> Забули пароль?
+                    </a>
+                </div>
             </div>
         </div>
     </div>
